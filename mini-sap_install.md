@@ -1,14 +1,28 @@
-# Установка SAP
+# Установка SAP NetWeaver AS ABAP Developer Edition
 
-1. Скачать OpenSUSE версии Leap 15.3 (**Важно:** 15.4 пока не подходит)
-1. Отключить виртуализацию в VirtualBox (иначе может отваливаться мышь)
-1. При установке
+## Установка SAP NetWeaver AS
+
+### I. Подготовительные шаги
+
+1. Проверить [требования](https://tools.hana.ondemand.com/#abap) к системе
+1. Скачать и yстановить [Oracle VirtualBox](https://www.virtualbox.org/)
+1. Скачать OpenSUSE версии [Leap 15.3](https://download.opensuse.org/distribution/leap/15.3/iso/openSUSE-Leap-15.3-3-NET-x86_64-Build38.1-Media.iso.mirrorlist) (**Важно:** версия 15.4 на текущий момент не подходит)
+1. Скачать и установить [SAPGUI](https://developers.sap.com/trials-downloads.html?search=SAP+GUI)
+1. Скачать дистрибутив [SAP NetWeaver AS](https://developers.sap.com/trials-downloads.html?search=SAP+NetWeaver+AS+ABAP+Developer+Edition)
+
+### II. Установка OpenSUSE на виртуальную машину
+
+1. Запустить VirtualBox и создать новую виртульную машину
+1. В настройках виртульной машины отключить виртуализацию в VirtualBox (иначе может отваливаться мышь)
+1. При установке OpenSUSE
    * Настроить параметры диска
       * Выбрать `EXT4`
       * Установить галочку `Propose Separate Swap Partition`
    * Выполнить настройки безопасности
       * Отключение файрвола активировать (`enable`)
       * Отключение SSH деактивировать (`disable`)
+
+### III. Настройка OpenSUSE
 
 1. Проверить свободное место на диске (должно быть в разделе `/dev/sda2` минимум 33 Gb свободного места)
 
@@ -84,6 +98,8 @@
    sudo service uuidd start
    sudo service --status-all | grep uuidd
    ```
+
+### IV. Запуск процесса установки
 
 1. Сделать файл скрипта запуска установки исполняемым
 
@@ -163,7 +179,11 @@
 
    После этого ключ разработчика не запрашивается
 
-## Установка и обновление пакетов
+## Администрирование OpenSUSE
+
+(необязательные шаги)
+
+1. Установка и обновление пакетов
 
    ```bash
    sudo zypper ref
@@ -171,40 +191,43 @@
    sudo zypper update
    ```
 
-*Источник: [linuxhint.com](https://linuxhint.com/update_all_packages_opensuse/)*
+   *Источник: [linuxhint.com](https://linuxhint.com/update_all_packages_opensuse/)*
 
-## Задать комбинацию горячих клавиш для открытия терминала
+1. Задать комбинацию горячих клавиш для открытия терминала
 
-* Перейти `Settings` > `Keyboard`, затем вкладка `Shorcuts`
-* Hit the `+` to add a new custom shortcut
-* Under Name enter `Terminal` in `Command` enter 'gnome-terminal' and then press `Add`
-* Click on `Disabled` to add a new accelerator, then press `CTRL+ALT+t` (or your preferred combination)
+   * Перейти `Settings` > `Keyboard`, затем вкладка `Shorcuts`
+   * Hit the `+` to add a new custom shortcut
+   * Under Name enter `Terminal` in `Command` enter 'gnome-terminal' and then press `Add`
+   * Click on `Disabled` to add a new accelerator, then press `CTRL+ALT+t` (or your preferred combination)
 
-*Источник: [forums.opensuse.org](https://forums.opensuse.org/showthread.php/514520-Launch-Gnome-Terminal-With-A-Hot-Key)*
+   *Источник: [forums.opensuse.org](https://forums.opensuse.org/showthread.php/514520-Launch-Gnome-Terminal-With-A-Hot-Key)*
 
-## Для OpenSUSE версии Leap 15.4
+1. Для OpenSUSE версии Leap 15.4
 
-(но этого всего для успешной установки, похоже, недосточно; используейте версию Leap 15.3)
+   (но этого всего для успешной установки, похоже, недосточно; используейте версию Leap 15.3)
 
-Установить пакет `tcsh`
+   Установить пакет `tcsh`
 
-   ```bash
-   sudo zypper install tcsh
-   ```
+      ```bash
+      sudo zypper install tcsh
+      ```
 
-Если установка зависает на строке
+   Если установка зависает на строке
 
-   ```text
-   INFO 2021-06-03 16:29:44.619 (root/sapinst) (startInstallation) [iaxxbfile.cpp:594] id=syslib.filesystem.aclSetSucceeded CIaOsFile::chmod_impl(3,0755)
-   Authorizations set for /sybase/NPL/startase_reset_sa.
-   ```
+      ```text
+      INFO 2021-06-03 16:29:44.619 (root/sapinst) (startInstallation) [iaxxbfile.cpp:594] id=syslib.filesystem.aclSetSucceeded CIaOsFile::chmod_impl(3,0755)
+      Authorizations set for /sybase/NPL/startase_reset_sa.
+      ```
 
-   то добавить в файл `/sybase/NPL/ASE-16_0/install/RUN_NPL` в строку `/NPL.cfg \` параметр `-T11889`
+      то добавить в файл `/sybase/NPL/ASE-16_0/install/RUN_NPL` в строку `/NPL.cfg \` параметр `-T11889`
 
-   ```text
-   sed -i 's/NPL.cfg \\/NPL.cfg -T11889 \\/g' /sybase/NPL/ASE-16_0/install/RUN_NPL
-   cat /sybase/NPL/ASE-16_0/install/RUN_NPL
-   ```
+      ```text
+      sed -i 's/NPL.cfg \\/NPL.cfg -T11889 \\/g' /sybase/NPL/ASE-16_0/install/RUN_NPL
+      cat /sybase/NPL/ASE-16_0/install/RUN_NPL
+      ```
 
 ---
-PS: В видео формате хорошая инструкция есть [тут](https://youtu.be/zAbgkt3ibYc)
+Дополнительная информация:
+
+* [Installing AS ABAP 7.52 dev edition on Virtual Box and Linux](https://www.sap.com/documents/2019/09/32638f18-687d-0010-87a3-c30de2ffd8ff.html)
+* [#ABAP #SAP #Как установить SAP на персональный компьютер](https://youtu.be/zAbgkt3ibYc)
