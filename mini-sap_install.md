@@ -205,3 +205,5 @@
    sed -i 's/NPL.cfg \\/NPL.cfg -T11889 \\/g' /sybase/NPL/ASE-16_0/install/RUN_NPL
    cat /sybase/NPL/ASE-16_0/install/RUN_NPL
    ```
+
+PS: В видео формате хорошая инструкция есть [тут](https://youtu.be/zAbgkt3ibYc)
