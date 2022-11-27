@@ -206,4 +206,5 @@
    cat /sybase/NPL/ASE-16_0/install/RUN_NPL
    ```
 
+---
 PS: В видео формате хорошая инструкция есть [тут](https://youtu.be/zAbgkt3ibYc)
