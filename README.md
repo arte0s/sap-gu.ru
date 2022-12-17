@@ -1,4 +1,4 @@
 # sap-gu.ru
 SAP knowledge base
 
-* [Установка SAP NetWeaver AS ABAP Developer Edition](https://github.com/arte0s/sap-gu.ru/blob/main/mini-sap_install.md)
+* [Установка SAP NetWeaver AS ABAP Developer Edition](ru-docs/mini-sap_install.md)
