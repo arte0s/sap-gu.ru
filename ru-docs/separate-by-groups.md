@@ -153,12 +153,8 @@
 
 | CARRID | CARRNAME | FLTIME | DISTANCE | GROUP_INDEX | GROUP_SIZE | POSITIONS |
 | --- | --- | --- | --- | --- | --- | --- |
-| AA | American Airlines | 361 | 2572.0 | 1 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AA</td><td>0017</td><td>361</td><td>2572.0</td></tr></table>
- |
-| AZ | Alitalia | 1065 | 6975.0 | 2 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AZ</td><td>0555</td><td>125</td><td>845.0</td></tr><tr><td>2</td><td>AZ</td><td>0789</td><td>940</td><td>6130.0</td></tr></table>
- |
-| DL | Delta Airlines | 475 | 3851.0 | 3 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>DL</td><td>0106</td><td>475</td><td>3851.0</td></tr></table>
- |
-| JL | Japan Airlines | 1400 | 18200.0 | 4 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>JL</td><td>0407</td><td>725</td><td>9100.0</td></tr><tr><td>2</td><td>JL</td><td>0408</td><td>675</td><td>9100.0</td></tr></table>
- |
+| AA | American Airlines | 361 | 2572.0 | 1 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AA</td><td>0017</td><td>361</td><td>2572.0</td></tr></table> |
+| AZ | Alitalia | 1065 | 6975.0 | 2 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AZ</td><td>0555</td><td>125</td><td>845.0</td></tr><tr><td>2</td><td>AZ</td><td>0789</td><td>940</td><td>6130.0</td></tr></table> |
+| DL | Delta Airlines | 475 | 3851.0 | 3 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>DL</td><td>0106</td><td>475</td><td>3851.0</td></tr></table> |
+| JL | Japan Airlines | 1400 | 18200.0 | 4 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>JL</td><td>0407</td><td>725</td><td>9100.0</td></tr><tr><td>2</td><td>JL</td><td>0408</td><td>675</td><td>9100.0</td></tr></table> |
 | LH | Lufthansa | 1399 | 19041.0 | 5 | 4 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>LH</td><td>0400</td><td>444</td><td>6162.0</td></tr><tr><td>2</td><td>LH</td><td>0401</td><td>435</td><td>6162.0</td></tr><tr><td>3</td><td>LH</td><td>0402</td><td>455</td><td>6162.0</td></tr><tr><td>4</td><td>LH</td><td>2402</td><td>65</td><td>555.0</td></tr></table> |
