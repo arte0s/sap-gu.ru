@@ -1,4 +1,4 @@
-# Разделение данные на заголвоки и позциии
+# Разделение данных на заголовки и позициии
 
 ## Дано
 
@@ -10,11 +10,15 @@
              carrname TYPE scarr-carrname,
            END OF ts_group_key.
 
+    TYPES: BEGIN OF ts_totals,
+             fltime   TYPE spfli-fltime,
+             distance TYPE spfli-distance,
+           END OF ts_totals.
+
     TYPES: BEGIN OF ts_header.
              INCLUDE TYPE ts_group_key AS group_key.
+             INCLUDE TYPE ts_totals AS totals.
            TYPES:
-                    fltime   TYPE spfli-fltime,
-                    distance TYPE spfli-distance,
                   END OF ts_header.
 
     TYPES: BEGIN OF ts_position,
@@ -41,15 +45,15 @@
 ```abap
     TYPES tth_position TYPE HASHED TABLE OF ts_position WITH UNIQUE KEY carrid connid.
 
-    TYPES: BEGIN OF ts_grp,
-             group_index TYPE int4,
-             group_size  TYPE int4.
+    TYPES: BEGIN OF ts_gheader.
              INCLUDE TYPE ts_header AS header.
            TYPES:
-                  END OF ts_grp.
+                    group_index TYPE int4,
+                    group_size  TYPE int4,
+                  END OF ts_gheader.
 
     TYPES: BEGIN OF ts_group.
-             INCLUDE TYPE ts_grp AS group.
+             INCLUDE TYPE ts_gheader AS gheader.
            TYPES:
                     positions TYPE tth_position,
                   END OF ts_group.
@@ -102,11 +106,11 @@
               )
 
             IN
-              group_index = ls_group-group_index
-              group_size  = ls_group-group_size
-              group_key   = ls_group-group_key
-              fltime      = l_total_time
-              distance    = l_total_distance
+              group_index     = ls_group-group_index
+              group_size      = ls_group-group_size
+              group_key       = ls_group-group_key
+              totals-fltime   = l_total_time
+              totals-distance = l_total_distance
 ***              positions   = VALUE #( FOR ls_pos_merged IN GROUP ls_group INDEX INTO l_pos_index "INDEX INTO doesn't work!
               positions   = REDUCE #(
                 INIT lt_pos TYPE tts_position
@@ -125,4 +129,36 @@
       ).
 ```
 
+## Пример программы
+
 Полный код примера см. в [abap-examples/src/ztmp_sao_group_by_headers.prog.abap](https://github.com/arte0s/abap-examples/blob/main/src/ztmp_sao_group_by_headers.prog.abap)
+
+### Входные данные (таблица LT_MERGED)
+
+| CARRID | CARRNAME | CONNID | FLTIME | DISTANCE |
+| --- | --- | --- | --- | --- |
+| AA | American Airlines | 0017 | 361 | 2572.0 |
+| AZ | Alitalia | 0555 | 125 | 845.0 |
+| AZ | Alitalia | 0789 | 940 | 6130.0 |
+| DL | Delta Airlines | 0106 | 475 | 3851.0 |
+| JL | Japan Airlines | 0407 | 725 | 9100.0 |
+| JL | Japan Airlines | 0408 | 675 | 9100.0 |
+| LH | Lufthansa | 0400 | 444 | 6162.0 |
+| LH | Lufthansa | 0401 | 435 | 6162.0 |
+| LH | Lufthansa | 0402 | 455 | 6162.0 |
+| LH | Lufthansa | 2402 | 65 | 555.0 |
+
+### Результат группировки (таблица lt_group)
+
+| CARRID | CARRNAME | FLTIME | DISTANCE | GROUP_INDEX | GROUP_SIZE | POSITIONS |
+| --- | --- | --- | --- | --- | --- | --- |
+| AA | American Airlines | 361 | 2572.0 | 1 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AA</td><td>0017</td><td>361</td><td>2572.0</td></tr></table>
+ |
+| AZ | Alitalia | 1065 | 6975.0 | 2 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>AZ</td><td>0555</td><td>125</td><td>845.0</td></tr><tr><td>2</td><td>AZ</td><td>0789</td><td>940</td><td>6130.0</td></tr></table>
+ |
+| DL | Delta Airlines | 475 | 3851.0 | 3 | 1 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>DL</td><td>0106</td><td>475</td><td>3851.0</td></tr></table>
+ |
+| JL | Japan Airlines | 1400 | 18200.0 | 4 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>JL</td><td>0407</td><td>725</td><td>9100.0</td></tr><tr><td>2</td><td>JL</td><td>0408</td><td>675</td><td>9100.0</td></tr></table>
+ |
+| LH | Lufthansa | 1399 | 19041.0 | 5 | 4 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>LH</td><td>0400</td><td>444</td><td>6162.0</td></tr><tr><td>2</td><td>LH</td><td>0401</td><td>435</td><td>6162.0</td></tr><tr><td>3</td><td>LH</td><td>0402</td><td>455</td><td>6162.0</td></tr><tr><td>4</td><td>LH</td><td>2402</td><td>65</td><td>555.0</td></tr></table>
+ |
