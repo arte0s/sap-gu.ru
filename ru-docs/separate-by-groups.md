@@ -161,7 +161,4 @@
  |
 | JL | Japan Airlines | 1400 | 18200.0 | 4 | 2 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>JL</td><td>0407</td><td>725</td><td>9100.0</td></tr><tr><td>2</td><td>JL</td><td>0408</td><td>675</td><td>9100.0</td></tr></table>
  |
-| LH | Lufthansa | 1399 | 19041.0 | 5 | 4 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>LH</td><td>0400</td><td>444</td><td>6162.0</td></tr><tr><td>2</td><td>LH</td><td>0401</td><td>435</td><td>6162.0</td></tr><tr><td>3</td><td>LH</td><td>0402</td><td>455</td><td>6162.0</td></tr><tr><td>4</td><td>LH</td><td>2402</td><td>65</td><td>555.0</td></tr></table>
- |
-
-Полный код примера см. в [abap-examples/src/ztmp_sao_group_by_headers.prog.abap](https://github.com/arte0s/abap-examples/blob/main/src/ztmp_sao_group_by_headers.prog.abap)
+| LH | Lufthansa | 1399 | 19041.0 | 5 | 4 | <table><thead><tr><th>INDEX</th><th>CARRID</th><th>CONNID</th><th>FLTIME</th><th>DISTANCE</th></tr></thead><tr><td>1</td><td>LH</td><td>0400</td><td>444</td><td>6162.0</td></tr><tr><td>2</td><td>LH</td><td>0401</td><td>435</td><td>6162.0</td></tr><tr><td>3</td><td>LH</td><td>0402</td><td>455</td><td>6162.0</td></tr><tr><td>4</td><td>LH</td><td>2402</td><td>65</td><td>555.0</td></tr></table> |
