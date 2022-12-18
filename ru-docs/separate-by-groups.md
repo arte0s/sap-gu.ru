@@ -61,7 +61,7 @@
 
 ## Решение
 
-Используем оператор `VALUE output_type( FOR GROUPS ... ):
+Используем оператор `VALUE output_type( FOR GROUPS ... )`:
 
 ```abap
     DATA(output_table) = VALUE output_type( FOR GROUPS group_name OF input_struct IN input_table 
@@ -129,12 +129,11 @@
       ).
 ```
 
-<<<<<<< HEAD
 ## Пример программы
 
 Полный код примера см. в [abap-examples/src/ztmp_sao_group_by_headers.prog.abap](https://github.com/arte0s/abap-examples/blob/main/src/ztmp_sao_group_by_headers.prog.abap)
 
-### Входные данные (таблица LT_MERGED)
+### Входные данные (таблица lt_merged)
 
 | CARRID | CARRNAME | CONNID | FLTIME | DISTANCE |
 | --- | --- | --- | --- | --- |
