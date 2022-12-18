@@ -111,7 +111,6 @@
               group_key       = ls_group-group_key
               totals-fltime   = l_total_time
               totals-distance = l_total_distance
-***              positions   = VALUE #( FOR ls_pos_merged IN GROUP ls_group INDEX INTO l_pos_index "INDEX INTO doesn't work!
               positions   = REDUCE #(
                 INIT lt_pos TYPE tts_position
                 FOR ls_pos_merged IN GROUP ls_group
@@ -131,7 +130,7 @@
 
 ## Пример программы
 
-Полный код примера см. в [abap-examples/src/ztmp_sao_group_by_headers.prog.abap](https://github.com/arte0s/abap-examples/blob/main/src/ztmp_sao_group_by_headers.prog.abap)
+Полный код примера см. программу [ztmp_sao_group_by_headers](https://github.com/arte0s/abap-examples/blob/main/src/ztmp_sao_group_by_headers.prog.abap)
 
 ### Входные данные (таблица lt_merged)
 
