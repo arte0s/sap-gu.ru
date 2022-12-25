@@ -74,58 +74,54 @@
     )
 ```
 
-Полностью с подсуммированием полей `fltime` и `distance` для заголовока и заполнение номера позиции в поле `index` (через `REDUCE #( ... )` ) эта конструкция может выглядеть так:
+Для определения характеристик можно использовтаь ключевые слова `GROUP INDEX` и `GRPUP SIZE`:
+
+- `field1 = GROUP INDEX` - получение номера группы
+- `field2 = GRPUP SIZE` - получение размера группы
+
+Полностью с подсуммированием полей `fltime` и `distance` для заголовока и заполнение номера позиции в поле `positions-index` (через `REDUCE #( ... )` ) эта конструкция может выглядеть так:
 
 ```abap
-    DATA(lt_group) = VALUE tts_group(
+  DATA(lt_group) = VALUE tth_group(
 
-      FOR GROUPS ls_group OF ls_merged IN lt_merged INDEX INTO l_ind
+    FOR GROUPS ls_group OF ls_merged IN lt_merged INDEX INTO l_ind
 
-        GROUP BY (
-          group_index = GROUP INDEX
-          group_size  = GROUP SIZE
-          group_key   = VALUE ts_group_key(
-            carrid   = ls_merged-carrid
-            carrname = ls_merged-carrname
-          )
+      GROUP BY (
+        group_key   = VALUE ts_group_key(
+          carrid   = ls_merged-carrid
+          carrname = ls_merged-carrname
         )
+        group_index = GROUP INDEX
+        group_size  = GROUP SIZE
+      )
 
-        ( VALUE #( "VALUE #( ... ) is needed here to use LET ... IN operator
-
-            LET
-              l_total_time = REDUCE ts_position-fltime(
-                INIT l_time TYPE ts_position-fltime
-                FOR ls_time_merged IN GROUP ls_group
-                NEXT l_time = l_time + ls_time_merged-fltime
+      ( VALUE #( "VALUE #( ... ) is needed here to use LET ... IN operator
+            group_index = ls_group-group_index
+            group_size  = ls_group-group_size
+            group_key   = ls_group-group_key
+            totals      = REDUCE #(
+              INIT ls_totals TYPE ts_totals
+              FOR ls_grp IN GROUP ls_group
+              NEXT ls_totals = VALUE #(
+                fltime   = ls_totals-fltime + ls_grp-fltime
+                distance = ls_totals-distance + ls_grp-distance
               )
-
-              l_total_distance = REDUCE ts_position-fltime(
-                INIT l_distance TYPE ts_position-fltime
-                FOR ls_dist_merged IN GROUP ls_group
-                NEXT l_distance = l_distance + ls_dist_merged-distance
-              )
-
-            IN
-              group_index     = ls_group-group_index
-              group_size      = ls_group-group_size
-              group_key       = ls_group-group_key
-              totals-fltime   = l_total_time
-              totals-distance = l_total_distance
-              positions   = REDUCE #(
-                INIT lt_pos TYPE tts_position
-                FOR ls_pos_merged IN GROUP ls_group
-                NEXT lt_pos = VALUE #( BASE lt_pos
-                  (
-                    index    = COND #( WHEN lt_pos IS INITIAL THEN 1 ELSE lt_pos[ lines( lt_pos ) ]-index + 1 )
-                    carrid   = ls_pos_merged-carrid
-                    connid   = ls_pos_merged-connid
-                    fltime   = ls_pos_merged-fltime
-                    distance = ls_pos_merged-distance
-                  )
+            )
+            positions   = REDUCE #(
+              INIT lt_pos TYPE tt_position
+              FOR ls_pos_merged IN GROUP ls_group
+              NEXT lt_pos = VALUE #( BASE lt_pos
+                (
+                  index    = COND #( WHEN lt_pos IS INITIAL THEN 1 ELSE lt_pos[ lines( lt_pos ) ]-index + 1 )
+                  carrid   = ls_pos_merged-carrid
+                  connid   = ls_pos_merged-connid
+                  fltime   = ls_pos_merged-fltime
+                  distance = ls_pos_merged-distance
                 )
               )
-        ) )
-      ).
+            )
+      ) )
+    ).
 ```
 
 ## Пример программы
