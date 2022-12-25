@@ -1,5 +1,8 @@
 # sap-gu.ru
+
+Switch to [Russian](README.ru.md)
+
 SAP knowledge base
 
-* [Установка SAP NetWeaver AS ABAP Developer Edition](ru-docs/mini-sap_install.md)
-* [Разделение данных на заголовки и позиции](ru-docs/separate-by-groups.md)
+* [Install SAP NetWeaver AS ABAP Developer Edition](ru-docs/mini-sap_install.md)
+* [Separate data by headers and positions](ru-docs/separate-by-groups.md)
