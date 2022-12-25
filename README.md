@@ -1,6 +1,6 @@
 # sap-gu.ru
 
-Switch to [Russian](README.ru.md)
+Переключиться на [Русский](README.ru.md)
 
 SAP knowledge base
 
